@@ -1,3 +1,6 @@
+import random
+import time
+
 from modules.Board import Board
 from modules.Ring import Ring
 from modules.Tower import Tower
@@ -26,9 +29,18 @@ def query_rings_number() -> int:
     return num
 
 
+def fake_board_construct_message():
+    print("Building board, please wait", end='')
+    for i in range(random.randrange(2, 5)):
+        time.sleep(0.5)
+        print('.', end='')
+    print()
+
+
 if __name__ == '__main__':
     rings_num = query_rings_number()
     board = Board(rings_num, ["a", "b", "c"])
+    # fake_board_construct_message()
     board.print_board()
 
 
