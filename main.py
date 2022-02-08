@@ -37,6 +37,16 @@ def fake_board_construct_message():
     print()
 
 
+def query_tower(board: Board, query_str: str) -> Tower:
+    while True:
+        tower_name = input(query_str)
+        tower = board.get_tower_by_name(tower_name)
+        if tower is not None:
+            return tower
+        else:
+            print("Invalid tower. Can only select")
+
+
 if __name__ == '__main__':
     tower_names = ["a", "b", "c"]
     print("Welcome to Towers of Hanoi!")
@@ -46,39 +56,32 @@ if __name__ == '__main__':
           "or that its top ring is larger than the one you're moving")
     # time.sleep(2)
     rings_num = query_rings_number()
-    # board = Board(rings_num, tower_names)
-    board = Board(2, tower_names)
+    board = Board(rings_num, tower_names)
+    # board = Board(2, tower_names)
     # fake_board_construct_message()
-    board.print_board()
-
-
-
-    game_state = {"a": [3, 2, 1], "b": [0, 0, 0], "c": [0, 0, 0]}
     while True:
-        print_board(game_state)
-        source = input("Choose source: ")
-        print(source)
-        target = input("Choose target: ")
-        print(target)
-        if source not in game_state or target not in game_state:
-            print("Invalid values. Can only use 'a', 'b' and 'c'")
-            continue
-        if source == target:
-            print("Can't choose the same source and target")
+        board.print_board()
+        source = query_tower(board, "Please select source tower from {}, {} or {}: ".format(*tower_names))
+        target = query_tower(board, "Please select target tower from {}, {} or {}: ".format(*tower_names))
+        source_top = source.top()
+        target_top = target.top()
+
+        if source_top is None:
+            print("The source tower {} has no rings!".format(source.name))
             continue
 
-        rings_source = game_state.get(source)
-        rings_target = game_state.get(target)
-        max_source = max(rings_source)
-        max_target = max(rings_target)
-        if max_source < max_target:
-            print("The target tower has a bigger ring than the source tower")
+        if target_top is not None and source_top.is_bigger(target_top):
+            print("The target tower {} top ring is smaller than the source tower {} top ring!".
+                  format(target.name, source.name))
             continue
 
-        rings_source[rings_source.index(max_source)] = 0
-        rings_target[max([i for i, x in enumerate(rings_target) if x == 0])] = max_source
+        ring = source.pop()
+        target.add_ring(ring)
 
-        if list(range(3, 0, -1)) == game_state.get("c"):
+        if board.get_tower_by_name("c").get_rings_amount() == board.max_ring:
             break
 
+    board.print_board()
+    print()
     print("You won!")
+

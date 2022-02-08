@@ -14,7 +14,7 @@ class Ring:
         return "*" + "**" * self.size
 
     def is_bigger(self, other) -> bool:
-        return self.size > other.size
+        return True if other is None else self.size > other.size
 
     @staticmethod
     def visualize_for_ring_size(ring_size: int):
