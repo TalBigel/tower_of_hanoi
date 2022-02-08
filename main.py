@@ -11,9 +11,28 @@ def print_board(game_state):
     print(TOWERS_FORMAT.format("a", "b", "c", x=4))
 
 
+def query_rings_number() -> int:
+    num = None
+    while True:
+        try:
+            num = int(input("Enter an integer number: "))
+            if num < 2:
+                raise ValueError
+            break
+        except ValueError:
+            print("Please input an integer larger than 1...")
+            continue
+
+    return num
+
+
 if __name__ == '__main__':
-    board = Board(5, ["a", "b", "c"])
+    rings_num = query_rings_number()
+    board = Board(rings_num, ["a", "b", "c"])
     board.print_board()
+
+
+
     game_state = {"a": [3, 2, 1], "b": [0, 0, 0], "c": [0, 0, 0]}
     while True:
         print_board(game_state)
