@@ -1,14 +1,19 @@
-TOWERS_FORMAT = "{0:1}\t{1:1}\t{2:1}"
+from modules.Board import Board
+from modules.Ring import Ring
+from modules.Tower import Tower
+
+TOWERS_FORMAT = "{0:{x}}\t{1:{x}}\t{2:{x}}"
 
 
 def print_board(game_state):
     for i in range(0, 3):
-        print(TOWERS_FORMAT.format(game_state["a"][i], game_state["b"][i], game_state["c"][i]))
-    print(TOWERS_FORMAT.format("a", "b", "c"))
+        print(TOWERS_FORMAT.format(game_state["a"][i], game_state["b"][i], game_state["c"][i], x=4))
+    print(TOWERS_FORMAT.format("a", "b", "c", x=4))
 
 
 if __name__ == '__main__':
-    game_won = False
+    board = Board(5, ["a", "b", "c"])
+    board.print_board()
     game_state = {"a": [3, 2, 1], "b": [0, 0, 0], "c": [0, 0, 0]}
     while True:
         print_board(game_state)
