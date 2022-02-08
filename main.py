@@ -18,7 +18,7 @@ def query_rings_number() -> int:
     num = None
     while True:
         try:
-            num = int(input("Enter an integer number: "))
+            num = int(input("Enter the number of rings you'd like to play with: "))
             if num < 2:
                 raise ValueError
             break
@@ -38,8 +38,16 @@ def fake_board_construct_message():
 
 
 if __name__ == '__main__':
+    tower_names = ["a", "b", "c"]
+    print("Welcome to Towers of Hanoi!")
+    # time.sleep(1)
+    print("In order to win, you need to move all the rings to the tower {}.".format(tower_names[-1]))
+    print("You can only move a ring to a tower that has no rings, "
+          "or that its top ring is larger than the one you're moving")
+    # time.sleep(2)
     rings_num = query_rings_number()
-    board = Board(rings_num, ["a", "b", "c"])
+    # board = Board(rings_num, tower_names)
+    board = Board(2, tower_names)
     # fake_board_construct_message()
     board.print_board()
 
