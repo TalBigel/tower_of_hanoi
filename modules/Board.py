@@ -27,6 +27,9 @@ class Board:
         return next((tower for tower in self.towers if tower.name == name), None)
 
     def print_board(self):
+        """
+        Prints the towers of the game and the rings on them as *** representation
+        """
         print()
         max_rings_in_tower = 0
         max_string_len = len(Ring.visualize_for_ring_size(self.max_ring))

@@ -15,3 +15,4 @@ SOURCE_TOWER_NO_RINGS_ERROR = "The source tower {} has no rings!"
 INVALID_MOVE_ERROR = "The target tower {} top ring is smaller than the source tower {} top ring!"
 
 GAME_WON = "You win!!!"
+REPLAY = "Would you like to play again?"

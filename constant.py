@@ -4,4 +4,4 @@ TOWERS_DICTIONARY = {
     "goal": "c"
 }
 
-
+MIN_NUMBER_RINGS = 2
